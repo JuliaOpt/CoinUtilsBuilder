@@ -49,9 +49,9 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/juan-pablo-vielma/COINGLPKBuilder/releases/download/v1.10.5-beta4/build_COINGLPKBuilder.v1.10.5.jl",
-    "https://github.com/juan-pablo-vielma/COINLapackBuilder/releases/download/v1.5.6-beta/build_COINLapackBuilder.v1.5.6.jl",
-    "https://github.com/juan-pablo-vielma/COINBLASBuilder/releases/download/v1.4.6-beta2/build_COINBLASBuilder.v1.4.6.jl"
+    "https://github.com/juan-pablo-vielma/COINGLPKBuilder/releases/download/v1.10.5/build_COINGLPKBuilder.v1.10.5.jl",
+    "https://github.com/juan-pablo-vielma/COINLapackBuilder/releases/download/v1.5.6/build_COINLapackBuilder.v1.5.6.jl",
+    "https://github.com/juan-pablo-vielma/COINBLASBuilder/releases/download/v1.4.6/build_COINBLASBuilder.v1.4.6.jl"
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
