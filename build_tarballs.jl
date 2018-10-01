@@ -17,10 +17,18 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd CoinUtils-releases-2.10.14/
 update_configure_scripts
+# temporary fix
+for path in ${LD_LIBRARY_PATH//:/ }; do
+    for file in $(ls $path/*.la); do
+        echo "$file"
+        baddir=$(sed -n "s|libdir=||p" $file)
+        sed -i~ -e "s|$baddir|'$path'|g" $file
+    done
+done
 mkdir build
 cd build/
-../configure --prefix=$prefix --with-pic --disable-pkg-config --with-blas="-L${prefix}/lib -lcoinblas -lgfortran" --host=${target} --enable-shared --enable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all --with-glpk-lib="-L${prefix}/lib -lcoinglpk" --with-glpk-incdir="$prefix/include/coin/ThirdParty" --with-lapack="-L${prefix}/lib -lcoinlapack" 
-make -j${nproc}
+../configure --prefix=$prefix --with-pic --disable-pkg-config --with-blas="-L${prefix}/lib -lcoinblas" --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all --with-glpk-lib="-L${prefix}/lib -lcoinglpk" --with-glpk-incdir="$prefix/include/coin/ThirdParty" --with-lapack="-L${prefix}/lib -lcoinlapack" 
+make -j${nproc} 
 make install
 
 """
@@ -41,6 +49,7 @@ platforms = [
     Windows(:i686),
     Windows(:x86_64)
 ]
+platforms = expand_gcc_versions(platforms)
 
 # The products that we will ensure are always built
 products(prefix) = [
