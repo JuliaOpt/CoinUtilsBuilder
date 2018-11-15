@@ -29,9 +29,8 @@ mkdir build
 cd build/
 ../configure --prefix=$prefix --with-pic --disable-pkg-config  --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all \
 --with-blas="-L${prefix}/lib -lcoinblas" \
---with-glpk-lib="-L${prefix}/lib -lcoinglpk" --with-glpk-incdir="$prefix/include/coin/ThirdParty" \
---with-lapack="-L${prefix}/lib -lcoinlapack" 
-make -j${nproc} 
+--with-lapack="-L${prefix}/lib -lcoinlapack"
+make -j${nproc}
 make install
 """
 
@@ -52,6 +51,9 @@ platforms = [
     Windows(:x86_64)
 ]
 platforms = expand_gcc_versions(platforms)
+# To fix gcc4 bug in Windows
+push!(platforms, Windows(:i686,compiler_abi=CompilerABI(:gcc6)))
+push!(platforms, Windows(:x86_64,compiler_abi=CompilerABI(:gcc6)))
 
 # The products that we will ensure are always built
 products(prefix) = [
@@ -60,11 +62,9 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/juan-pablo-vielma/COINGLPKBuilder/releases/download/v1.10.5-1/build_COINGLPKBuilder.v1.10.5.jl",
     "https://github.com/juan-pablo-vielma/COINLapackBuilder/releases/download/v1.5.6-1/build_COINLapackBuilder.v1.5.6.jl",
     "https://github.com/juan-pablo-vielma/COINBLASBuilder/releases/download/v1.4.6-1/build_COINBLASBuilder.v1.4.6.jl"
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
-
