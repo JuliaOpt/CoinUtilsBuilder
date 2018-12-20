@@ -32,8 +32,8 @@ if [ $target = "x86_64-apple-darwin14" ]; then
   export AR=/opt/x86_64-apple-darwin14/bin/llvm-ar
 fi
 ../configure --prefix=$prefix --with-pic --disable-pkg-config  --host=${target} --disable-shared --enable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all \
---with-blas="-L${prefix}/lib -lcoinblas" \
---with-lapack="-L${prefix}/lib -lcoinlapack"
+--with-blas-lib="-L${prefix}/lib -lcoinblas" \
+--with-lapack-lib="-L${prefix}/lib -lcoinlapack"
 ## STATIC BUILD END
 ## DYNAMIC BUILD START
 #../configure --prefix=$prefix --with-pic --disable-pkg-config  --host=${target} --enable-shared --disable-static --enable-dependency-linking lt_cv_deplibs_check_method=pass_all \
