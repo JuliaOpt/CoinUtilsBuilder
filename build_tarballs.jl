@@ -3,19 +3,19 @@
 using BinaryBuilder
 
 name = "CoinUtilsBuilder"
-version = v"2.10.14"
+version = v"2.11.3"
 
 # Collection of sources required to build CoinUtilsBuilder
 sources = [
-    "https://github.com/coin-or/CoinUtils/archive/releases/2.10.14.tar.gz" =>
-    "929b6eae0aaf62cf4467e506f24dfab1df7ab8d2e5a1ea71e9bab5480e872d84",
+    "https://github.com/coin-or/CoinUtils/archive/releases/2.11.3.tar.gz" =>
+    "7c4753816e765974941db75ec89f8855e56b86959f3a5f068fdf95b0003be61c",
 
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
-cd CoinUtils-releases-2.10.14/
+cd CoinUtils-releases-2.11.3/
 update_configure_scripts
 # temporary fix
 for path in ${LD_LIBRARY_PATH//:/ }; do
@@ -75,7 +75,7 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/juan-pablo-vielma/COINLapackBuilder/releases/download/v1.5.6-1-static/build_COINLapackBuilder.v1.5.6.jl",
+    "https://github.com/JuliaOpt/COINLapackBuilder/releases/download/v1.6.0-static/build_COINLapackBuilder.v1.6.0.jl",
     "https://github.com/juan-pablo-vielma/COINBLASBuilder/releases/download/v1.4.6-1-static/build_COINBLASBuilder.v1.4.6.jl"
 ]
 
